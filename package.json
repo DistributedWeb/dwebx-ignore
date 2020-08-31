@@ -1,24 +1,24 @@
 {
-  "name": "dat-ignore",
-  "description": "default ignore for dat",
-  "version": "2.1.2",
-  "author": "Dat Project contributors",
+  "name": "dwebx-ignore",
+  "description": "default ignore for dwebx",
+  "version": "1.0.0",
+  "author": "DWebX Project contributors",
   "bugs": {
-    "url": "https://github.com/datproject/dat-ignore/issues"
+    "url": "https://github.com/distributedweb/dwebx-ignore/issues"
   },
   "devDependencies": {
     "standard": "*",
     "tape": "^4.10.1"
   },
-  "homepage": "https://github.com/datproject/dat-ignore",
+  "homepage": "https://github.com/distributedweb/dwebx-ignore",
   "keywords": [
-    "dat"
+    "dwebx"
   ],
   "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/datproject/dat-ignore.git"
+    "url": "https://github.com/distributedweb/dwebx-ignore.git"
   },
   "scripts": {
     "test": "standard && tape test/*.js"
