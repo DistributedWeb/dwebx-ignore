@@ -1,8 +1,8 @@
 {
   "name": "dwebx-ignore",
-  "description": "default ignore for dwebx",
+  "description": "Module for parsing dWeb 1.0 ignore files.",
   "version": "1.0.0",
-  "author": "DWebX Project contributors",
+  "author": "Peeps Labs <peepslabs.gmail.com>",
   "bugs": {
     "url": "https://github.com/distributedweb/dwebx-ignore/issues"
   },
@@ -10,7 +10,7 @@
     "standard": "*",
     "tape": "^4.10.1"
   },
-  "homepage": "https://github.com/distributedweb/dwebx-ignore",
+  "homepage": "https://dwebx.org",
   "keywords": [
     "dwebx"
   ],
