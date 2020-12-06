@@ -2,10 +2,10 @@ var fs = require('fs')
 var path = require('path')
 var test = require('tape')
 
-var datIgnore = require('..')
+var dwebxIgnore = require('..')
 
 test('default ignore with dir', function (t) {
-  var ignore = datIgnore(__dirname)
+  var ignore = dwebxIgnore(__dirname)
   checkDefaults(t, ignore)
 
   // DWebX Ignore stuff
@@ -16,7 +16,7 @@ test('default ignore with dir', function (t) {
 
 // test('ignore from within hidden folder', function (t) {
 //   var dir = path.join(__dirname, '.hidden')
-//   var ignore = datIgnore(dir)
+//   var ignore = dwebxIgnore(dir)
 //   checkDefaults(t, ignore)
 //   t.notOk(ignore(path.join(dir, 'index.js')), 'file allowed inside hidden')
 
@@ -24,7 +24,7 @@ test('default ignore with dir', function (t) {
 // })
 
 test('custom ignore extends default (string)', function (t) {
-  var ignore = datIgnore(__dirname, { ignore: '**/*.js' })
+  var ignore = dwebxIgnore(__dirname, { ignore: '**/*.js' })
   t.ok(ignore('.dwebx'), '.dwebx folder ignored')
   t.ok(ignore('foo/bar.js'), 'custom ignore works')
   t.notOk(ignore('foo/bar.txt'), 'txt file gets to come along =)')
@@ -32,7 +32,7 @@ test('custom ignore extends default (string)', function (t) {
 })
 
 test('custom ignore extends default (array)', function (t) {
-  var ignore = datIgnore(__dirname, { ignore: ['super_secret_stuff/*', '**/*.txt'] })
+  var ignore = dwebxIgnore(__dirname, { ignore: ['super_secret_stuff/*', '**/*.txt'] })
   t.ok(ignore('.dwebx'), '.dwebx still feeling left out =(')
   t.ok(ignore('password.txt'), 'file ignored')
   t.ok(ignore('super_secret_stuff/file.js'), 'secret stuff stays secret')
@@ -41,7 +41,7 @@ test('custom ignore extends default (array)', function (t) {
 })
 
 test('ignore hidden option turned off', function (t) {
-  var ignore = datIgnore(__dirname, { ignoreHidden: false })
+  var ignore = dwebxIgnore(__dirname, { ignoreHidden: false })
 
   t.ok(ignore('.dwebx'), '.dwebx still feeling left out =(')
   t.notOk(ignore('.other-hidden'), 'hidden file NOT ignored')
@@ -49,61 +49,61 @@ test('ignore hidden option turned off', function (t) {
   t.end()
 })
 
-test('useDatIgnore false', function (t) {
-  var ignore = datIgnore(__dirname, { useDatIgnore: false })
+test('useDWebxIgnore false', function (t) {
+  var ignore = dwebxIgnore(__dirname, { useDWebxIgnore: false })
   t.ok(ignore('.dwebx'), '.dwebx ignored')
   t.notOk(ignore(path.join(__dirname, 'index.js')), 'file in dwebxignore not ignored')
   t.end()
 })
 
-test('change datignorePath', function (t) {
-  var ignore = datIgnore(path.join(__dirname, '..'), { datignorePath: path.join(__dirname, '.dwebxignore') })
+test('change dwebxignorePath', function (t) {
+  var ignore = dwebxIgnore(path.join(__dirname, '..'), { dwebxignorePath: path.join(__dirname, '.dwebxignore') })
   t.ok(ignore('.dwebx'), '.dwebx ignored')
   t.ok(ignore(path.join(__dirname, '..', 'index.js')), 'file in dwebxignore ignored')
   t.end()
 })
 
 test('dwebxignore as buf', function (t) {
-  var ignore = datIgnore(__dirname, { dwebxignore: fs.readFileSync(path.join(__dirname, '.dwebxignore')) })
+  var ignore = dwebxIgnore(__dirname, { dwebxignore: fs.readFileSync(path.join(__dirname, '.dwebxignore')) })
   t.ok(ignore('.dwebx'), '.dwebx ignored')
   t.ok(ignore(path.join(__dirname, 'index.js')), 'file in dwebxignore ignored')
   t.end()
 })
 
 test('dwebxignore as str', function (t) {
-  var ignore = datIgnore(__dirname, { dwebxignore: fs.readFileSync(path.join(__dirname, '.dwebxignore'), 'utf-8') })
+  var ignore = dwebxIgnore(__dirname, { dwebxignore: fs.readFileSync(path.join(__dirname, '.dwebxignore'), 'utf-8') })
   t.ok(ignore('.dwebx'), '.dwebx ignored')
   t.ok(ignore(path.join(__dirname, 'index.js')), 'file in dwebxignore ignored')
   t.end()
 })
 
 test('well-known not ignored', function (t) {
-  var ignore = datIgnore(__dirname)
+  var ignore = dwebxIgnore(__dirname)
   t.notOk(ignore(path.join(__dirname, '.well-known/dwebx')), 'well known dwebx not ignored')
   t.end()
 })
 
 test('node_modules ignored', function (t) {
-  var ignore = datIgnore(path.join(__dirname, '..'), { datignorePath: path.join(__dirname, '.dwebxignore') })
+  var ignore = dwebxIgnore(path.join(__dirname, '..'), { dwebxignorePath: path.join(__dirname, '.dwebxignore') })
   t.ok(ignore(path.join(__dirname, 'node_modules')), 'node_modules ignored')
   t.end()
 })
 
 test('node_modules subdir ignored', function (t) {
-  var ignore = datIgnore(path.join(__dirname, '..'), { datignorePath: path.join(__dirname, '.dwebxignore') })
+  var ignore = dwebxIgnore(path.join(__dirname, '..'), { dwebxignorePath: path.join(__dirname, '.dwebxignore') })
   t.ok(ignore(path.join(__dirname, 'node_modules', 'dwebx')), 'node_modules subdir ignored')
   t.end()
 })
 
 test('node_modules file ignored', function (t) {
-  var ignore = datIgnore(path.join(__dirname, '..'), { datignorePath: path.join(__dirname, '.dwebxignore') })
+  var ignore = dwebxIgnore(path.join(__dirname, '..'), { dwebxignorePath: path.join(__dirname, '.dwebxignore') })
   t.ok(ignore(path.join(__dirname, 'node_modules', 'dwebx', 'hello.txt')), 'node_modules subdir ignored')
   t.end()
 })
 
 test('throws without directory option', function (t) {
   t.throws(function () {
-    datIgnore({ opts: true })
+    dwebxIgnore({ opts: true })
   })
   t.end()
 })

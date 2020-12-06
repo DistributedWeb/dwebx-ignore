@@ -22,8 +22,8 @@ npm install dwebx-ignore
 ## Usage
 
 ```js
-var datIgnore = require('dwebx-ignore')
-var ignore = datIgnore('/data/dir')
+var dwebxIgnore = require('dwebx-ignore')
+var ignore = dwebxIgnore('/data/dir')
 
 console.log(ignore('.dwebx')) // true
 console.log(ignore('.git')) // true
@@ -40,7 +40,7 @@ Common configuration options.
 #### Add custom ignore
 
 ```js
-var ignore = datIgnore('/data/dir', {
+var ignore = dwebxIgnore('/data/dir', {
     ignore: [
       '**/node_modules/**', 
       'path/to/file.js',
@@ -52,14 +52,14 @@ var ignore = datIgnore('/data/dir', {
 #### Allow Hidden Files
 
 ```js
-var ignore = datIgnore('/data/dir', { ignoreHidden: false })
+var ignore = dwebxIgnore('/data/dir', { ignoreHidden: false })
 ```
 
 ####  Change DWebX Ignore Path
 
 ```js
-var ignore = datIgnore('/data/dir', {
-    datignorePath: '~/.dwebxignore'
+var ignore = dwebxIgnore('/data/dir', {
+    dwebxignorePath: '~/.dwebxignore'
   })
 ```
 
@@ -68,16 +68,16 @@ var ignore = datIgnore('/data/dir', {
 Pass in a string as a newline delimited list of things to ignore.
 
 ```js
-var datIgnoreFile = fs.readFileSync('~/.dwebxignore')
-datIgnoreFile += '\n' + fs.readFileSync(path.join(dir, '.dwebxignore'))
-datIgnoreFile += '\n' + fs.readFileSync(path.join(dir, '.gitignore'))
+var dwebxIgnoreFile = fs.readFileSync('~/.dwebxignore')
+dwebxIgnoreFile += '\n' + fs.readFileSync(path.join(dir, '.dwebxignore'))
+dwebxIgnoreFile += '\n' + fs.readFileSync(path.join(dir, '.gitignore'))
 
-var ignore = datIgnore('/data/dir', { dwebxignore: datIgnoreFile })
+var ignore = dwebxIgnore('/data/dir', { dwebxignore: dwebxIgnoreFile })
 ```
 
 ## API
 
-### `var ignore = datIgnore(dir, [opts])`
+### `var ignore = dwebxIgnore(dir, [opts])`
 
 Returns a function that checks if a path should be ignored:
 
@@ -94,9 +94,9 @@ ignore('data/cats.csv') // false
 #### Options:
 
 * `opts.ignore` - Extend custom ignore with any anymatch string or array.
-* `opts.useDatIgnore` - Use the `.dwebxignore` file in `dir` (default: true)
+* `opts.useDWebxIgnore` - Use the `.dwebxignore` file in `dir` (default: true)
 * `opts.ignoreHidden` - Ignore all hidden files/folders (default: true)
-* `opts.datignorePath` - Path to `.dwebxignore` file (default: `dir/.dwebxignore`)
+* `opts.dwebxignorePath` - Path to `.dwebxignore` file (default: `dir/.dwebxignore`)
 * `opts.dwebxignore` - Pass `.dwebxignore` as buffer or string
 
 ## License

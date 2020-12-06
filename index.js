@@ -8,7 +8,7 @@ module.exports = ignore
 function ignore (dir, opts) {
   assert.strictEqual(typeof dir, 'string', 'dwebx-ignore: directory required')
   opts = Object.assign({
-    datignorePath: path.join(dir, '.dwebxignore')
+    dwebxignorePath: path.join(dir, '.dwebxignore')
   }, opts)
   dir = path.resolve(dir)
 
@@ -21,11 +21,11 @@ function ignore (dir, opts) {
 
   var defaultIgnore = [/^(?:\/.*)?\.dwebx(?:\/.*)?$/, '.DS_Store', '**/.DS_Store'] // ignore .dwebx (and DS_Store)
   var ignoreHidden = !(opts.ignoreHidden === false) ? [/(^\.|\/\.).*/] : null // ignore hidden files anywhere
-  var datIgnore = !(opts.useDatIgnore === false) ? readDatIgnore() : null
+  var dwebxIgnore = !(opts.useDWebxIgnore === false) ? readDatIgnore() : null
 
   // Add ignore options
   ignoreMatches = ignoreMatches.concat(defaultIgnore) // always ignore .dwebx folder
-  if (datIgnore) ignoreMatches = ignoreMatches.concat(datIgnore) // add .dwebxignore
+  if (dwebxIgnore) ignoreMatches = ignoreMatches.concat(dwebxIgnore) // add .dwebxignore
   if (ignoreHidden) ignoreMatches = ignoreMatches.concat(ignoreHidden) // ignore all hidden things
   ignoreMatches = ignoreMatches.concat(allow)
 
@@ -58,7 +58,7 @@ function ignore (dir, opts) {
 
   function readDatIgnore () {
     try {
-      var ignores = opts.dwebxignore || fs.readFileSync(opts.datignorePath, 'utf8')
+      var ignores = opts.dwebxignore || fs.readFileSync(opts.dwebxignorePath, 'utf8')
       if (ignores && typeof opts.dwebxignore !== 'string') ignores = ignores.toString()
       return ignores
         .trim()
